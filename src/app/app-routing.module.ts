@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { TodosModule } from './modules/todos/todos.module';
-
 const routes: Routes = [
   {
     path: '',
@@ -11,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'todos',
-    loadChildren: () => TodosModule,
+    loadChildren: () => import('./modules/todos/todos.module').then((m) => m.TodosModule),
   },
 ];
 
