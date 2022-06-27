@@ -2,4 +2,5 @@ import { createAction, props } from '@ngrx/store';
 
 import { Todo } from '../models/todo';
 
-export const fetchTodos = createAction('[Todos] Fetch todos', props<{ todos: Todo[] }>());
+export const loadTodos = createAction('[Todos] Load todos');
+export const fetchedTodos = createAction('[Todos] Fetched todos', props<{ todos: Todo[] }>());

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 import { Todo } from '../models/todo';
-import { fetchTodos } from '../todos-store/todos.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -11,9 +11,7 @@ import { fetchTodos } from '../todos-store/todos.actions';
 export class TodosService {
   constructor(private readonly httpClient: HttpClient, private readonly store: Store) {}
 
-  fetchTodos(): void {
-    this.httpClient
-      .get<Todo[]>('https://jsonplaceholder.typicode.com/todos')
-      .subscribe({ next: (todos: Todo[]) => this.store.dispatch(fetchTodos({ todos })) });
+  fetchTodos(): Observable<Todo[]> {
+    return this.httpClient.get<Todo[]>('https://jsonplaceholder.typicode.com/todos');
   }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TodosService } from '../../services/todos.service';
+import { Store } from '@ngrx/store';
+
+import { loadTodos } from '../../todos-store/todos.actions';
 
 @Component({
   selector: 'ngt-home',
@@ -7,9 +9,9 @@ import { TodosService } from '../../services/todos.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private readonly todosService: TodosService) {}
+  constructor(private readonly store: Store) {}
 
   ngOnInit(): void {
-    this.todosService.fetchTodos();
+    this.store.dispatch(loadTodos());
   }
 }
