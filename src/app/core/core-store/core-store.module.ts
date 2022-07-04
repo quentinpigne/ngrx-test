@@ -4,14 +4,14 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { coreReducer } from './core.reducer';
+import { userReducer } from './reducers/user.reducer';
 
 @NgModule({
   imports: [
     CommonModule,
     EffectsModule.forRoot(),
     StoreModule.forRoot(
-      { core: coreReducer },
+      { user: userReducer },
       { runtimeChecks: { strictActionImmutability: true, strictStateImmutability: true } },
     ),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
