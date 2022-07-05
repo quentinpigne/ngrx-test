@@ -1,16 +1,29 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { UserState, initialState } from '../states/user.state';
-import * as UserActions from '../actions/user.actions';
+import { UserActions } from '../actions';
 
-export const userReducer = createReducer<UserState>(
+export const userFeatureKey = 'user';
+
+export interface State {
+  user: string;
+  isLoading: boolean;
+  isError: boolean;
+}
+
+export const initialState: State = {
+  user: '',
+  isLoading: false,
+  isError: false,
+};
+
+export const userReducer = createReducer<State>(
   initialState,
-  on(UserActions.loadUser, (state: UserState) => ({ ...state, isLoading: true })),
-  on(UserActions.loadUserSuccess, (state: UserState, { user }: { user: string }) => ({
+  on(UserActions.loadUser, (state: State) => ({ ...state, isLoading: true })),
+  on(UserActions.loadUserSuccess, (state: State, { user }: { user: string }) => ({
     ...state,
     user,
     isLoading: false,
     isError: false,
   })),
-  on(UserActions.loadUserFailure, (state: UserState) => ({ ...state, user: '', isLoading: false, isError: false })),
+  on(UserActions.loadUserFailure, (state: State) => ({ ...state, user: '', isLoading: false, isError: false })),
 );
